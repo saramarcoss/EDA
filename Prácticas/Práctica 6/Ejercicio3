@@ -1,0 +1,11 @@
+  void bfs(std::function<void (const TipoDato&)> action) const {
+         Queue queue;
+         queue.push(*root);
+         while (!queue.empty()) {
+             ElementoArbol elem = queue.front();
+             queue.pop();
+             action(elem.dato);
+             if (elem.left) { queue.push(*elem.left);}
+             if (elem.right) { queue.push(*elem.right);}
+         }
+     }

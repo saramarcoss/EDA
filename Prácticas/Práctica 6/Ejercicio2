@@ -1,0 +1,33 @@
+int BusquedaBinariaRecursiva(const std::vector<int>& v, int valorAbuscar, int primero, int ultimo) { 
+    if (primero > ultimo) { // Caso base
+        return -1;
+    }
+
+    int medio = (primero+ultimo)/2;
+    
+    if (v.at(medio) < valorAbuscar) {
+        return BusquedaBinariaRecursiva(v, valorAbuscar, medio+1, ultimo);
+    }
+    else if(v.at(medio) > valorAbuscar) {
+        return BusquedaBinariaRecursiva(v, valorAbuscar, primero, medio-1);
+    }
+    else { //son iguales => Encontrado
+        return medio;
+    }
+}
+
+int main()
+{
+    std::vector<int> miVec{4,2,7,9,1,3,500,-123,0};
+    //Para implmentar la búsqueda binaria el vector tiene que estar ordenado
+    std::sort(miVec.begin(), miVec.end());
+
+    int IndiceBusqueda = BusquedaBinariaRecursiva(miVec, 5, 0, miVec.size()-1);
+    if(IndiceBusqueda == -1) {
+        std::cout << "Valor no encontrado" << std::endl;
+    }
+    else {
+        std::cout << "El valor esta en la posicion: " << IndiceBusqueda<<std::endl;
+    }
+    return 0;
+}
